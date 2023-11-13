@@ -119,10 +119,12 @@ def categories(request):
 
 def category(request, category_id):
     category = get_object_or_404(Category, id=category_id)
-    listings = Listing.objects.filter(categories = category, active=True)
+    listings = Listing.objects.filter(categories=category, active=True)
+    
     return render(request, "auctions/index.html", {
         'listings': listings,
         'banner': f'{category.name} Listings',
+        'category': category,  
     })
 
 @login_required(login_url='login')

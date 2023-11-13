@@ -13,7 +13,7 @@ class Listing(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="listings")
     title = models.CharField(max_length=64)
     description = models.TextField(max_length=500)
-    image = models.ImageField(upload_to='images/listings', blank=True)
+    image = models.ImageField(upload_to='DEFAULT_FILE_STORAGE', blank=True)
     active = models.BooleanField(default=True)
     starting_bid = models.IntegerField(default=1, validators=[MinValueValidator(1)])
     watchers = models.ManyToManyField(User, blank=True, related_name="watched_listings")
@@ -69,6 +69,7 @@ class Comment(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/categories', blank=True)
+    
 
     class Meta:
         verbose_name_plural = 'Categories'
